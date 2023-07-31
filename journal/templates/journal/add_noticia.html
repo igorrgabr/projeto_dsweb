@@ -1,0 +1,10 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    <h2>Cadastro de Notícia</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Cadastrar</button>
+    </form>
+{% endblock %}

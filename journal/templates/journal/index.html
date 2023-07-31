@@ -1,0 +1,28 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    {% if ultima_edicao %}
+        <h3>Última edição</h3>
+        <h4>{{ ultima_edicao.titulo }}</h4>
+        <p>{{ ultima_edicao.descricao }}</p>
+        <p>Postada por {{ ultima_edicao.usuario }} em {{ ultima_edicao.data }}</p>
+        <a href="{% url 'journal:edicao' ultima_edicao.id %}">Mais detalhes</a>
+        <ul>
+            {% for n in noticias %}
+            <li>
+                <a href="{% url 'journal:noticia' n.id %}">{{ n.titulo }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4>Não há nenhuma edição cadastrada.</h4>
+    {% endif %}
+    <a href="{% url 'journal:lista_edicao' %}">Acessar mais edições</a><br/>
+    <br/>
+    {% if not user.is_authenticated %}
+    <a href="{% url 'journal:login' %}">Login</a> /
+    <a href="{% url 'journal:registration' %}">Cadastro</a>
+    {% else %}
+    <a href="{% url 'journal:logout' %}">Logout</a>
+    {% endif %}
+{% endblock %}

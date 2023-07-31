@@ -1,0 +1,24 @@
+{% load static %}
+<html>
+    <head>
+        <title>Enquetes</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/styles.css' %}"/>
+    </head>
+    <body>
+        <h1>Aplicação de Enquetes</h1>
+        <h2>Lista de Questões</h2>
+        {% if question_list %}
+        <ul>
+            {% for q in question_list %}
+                <li><a href="{% url 'polls:detail' q.id %}">{{ q.question_text }}</a></li><br/>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <h3>Nenhuma questão encontrada.</h3>
+        {% endif %}
+        <form method="GET" action="{% url 'polls:index' %}">
+            <input type="text" name="qr" value="{{query}}" placeholder="Procurar uma questão">
+            <button type="submit">Buscar</button>
+        </form>
+    </body>
+</html>

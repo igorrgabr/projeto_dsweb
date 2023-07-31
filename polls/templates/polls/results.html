@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Enquetes</title>
+    </head>
+    <body>
+        <h1>Aplicação de Enquetes</h1>
+        <h2>Resultado da Enquete #{{ question.id }}</h2>
+        <h3>{{ question.question_text }}</h3>
+        <ul>
+            {% for q in question.choice_set.all %}
+                <li>{{ q.choice_text }} - {{ q.votes }} vote{{ q.votes | pluralize }}</li>
+            {% endfor %}
+        </ul>
+        <hr/>
+        <a href="{% url 'polls:index' %}">Retornar ao início</a> |
+        <a href="{% url 'polls:detail' question.id %}">Votar novamente</a>
+    </body>
+</html>

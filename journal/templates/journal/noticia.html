@@ -1,0 +1,20 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    <h3>{{ noticia.titulo }}</h3>
+    <p>{{ noticia.conteudo }}</p>
+    <p> Publicada por {{ noticia.usuario }} em {{ noticia.data_pub }}</p>
+    <h4>Comentários</h4>
+    <a href="{% url 'journal:add_comentario' noticia.id %}">Cadastrar comentário</a>
+    {% if comentarios %}
+        {% for c in comentarios %}
+            <p>{{ c.usuario }} comentou:</p>
+            <p>"{{ c.conteudo }}"</p>
+            <p>em {{ c.data_pub }}</p>
+            <br/>
+        {% endfor %}
+    {% else %}
+        <p>Não há comentários nessa notícia.</p>
+    {% endif %}
+    <a href="{% url 'journal:index' %}">Voltar ao início</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    <h3>Edição n°{{ edicao.id }}</h3>
+    <h4>{{ edicao.titulo }}</h4>
+    <p>publicada por {{ edicao.usuario }} em {{ edicao.data }}</p>
+    <ul>
+        {% for n in noticias %}
+        <li>
+            <a href="{% url 'journal:noticia' n.id %}">{{ n.titulo }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <form method="GET" action="{% url 'journal:edicao' edicao.id %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Procurando alguma notícia?" />
+        <button type="submit">Pesquisar</button>
+    </form>
+    <a href="{% url 'journal:add_noticia' edicao.id %}">Cadastrar notícia</a> /
+    <a href="{% url 'journal:index' %}">Voltar ao início</a>
+{% endblock %}

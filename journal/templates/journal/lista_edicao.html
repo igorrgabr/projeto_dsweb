@@ -1,0 +1,18 @@
+{% extends 'journal/base.html' %}
+
+{% block content %}
+    {% if lista_edicao %}
+        <h3>Outras edições</h3>
+        {% for e in lista_edicao %}
+            <ul>
+                <li>
+                    <a href="{% url 'journal:edicao' e.id %}">{{ e.titulo }}</a>
+                </li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <h4>Não há outras edições cadastradas.</h4>
+    {% endif %}
+    <a href="{% url 'journal:add_edicao' %}">Cadastrar nova edição</a> /
+    <a href="{% url 'journal:index' %}">Voltar ao início</a>
+{% endblock %}
